@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import path from "path";
 
-const UI_URL = "http://localhost:5174/";
+const UI_URL = "http://localhost:5173/";
 
 test.beforeEach(async ({ page }) => {
   await page.goto(UI_URL);
@@ -11,12 +11,12 @@ test.beforeEach(async ({ page }) => {
 
   await expect(page.getByRole("heading", { name: "Sign In" })).toBeVisible();
 
-  await page.locator("[name=email]").fill("1@1.com");
-  await page.locator("[name=password]").fill("password123");
+  await page.locator("[name=email]").fill("marios@mail.com");
+  await page.locator("[name=password]").fill("aaaaaa");
 
   await page.getByRole("button", { name: "Login" }).click();
 
-  await expect(page.getByText("Sign in Successful!")).toBeVisible();
+  await expect(page.getByText("Sign in Successfull")).toBeVisible();
 });
 
 test("should allow user to add a hotel", async ({ page }) => {
@@ -40,8 +40,8 @@ test("should allow user to add a hotel", async ({ page }) => {
   await page.locator('[name="childCount"]').fill("4");
 
   await page.setInputFiles('[name="imageFiles"]', [
-    path.join(__dirname, "files", "1.jpg"),
-    path.join(__dirname, "files", "2.jpg"),
+    path.join(__dirname, "files", "hotel.jpg"),
+    path.join(__dirname, "files", "hotel2.jpg"),
   ]);
 
   await page.getByRole("button", { name: "Save" }).click();

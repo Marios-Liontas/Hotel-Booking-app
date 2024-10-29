@@ -1,8 +1,7 @@
 import { useFormContext } from "react-hook-form";
-import { hotelFacilities } from "../../config/hotel-options-config";
 import { HotelFormData } from "./ManageHotelForm";
 
-const FacilitiesSection = () => {
+const GuestsSection = () => {
   const {
     register,
     formState: { errors },
@@ -10,34 +9,43 @@ const FacilitiesSection = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-3">Facilities</h2>
-      <div className="grid grid-cols-5 gap-3">
-        {hotelFacilities.map((facility) => (
-          <label className="text-sm flex gap-1 text-gray-700">
-            <input
-              type="checkbox"
-              value={facility}
-              {...register("facilities", {
-                validate: (facilities) => {
-                  if (facilities && facilities.length > 0) {
-                    return true;
-                  } else {
-                    return "At least one facility is required";
-                  }
-                },
-              })}
-            />
-            {facility}
-          </label>
-        ))}
+      <h2 className="text-2xl font-bold mb-3">Guests</h2>
+      <div className="grid grid-cols-2 p-6 gap-5 bg-gray-300">
+        <label className="text-gray-700 text-sm font-semibold">
+          Adults
+          <input
+            className="border rounded w-full py-2 px-3 font-normal"
+            type="number"
+            min={1}
+            {...register("adultCount", {
+              required: "This field is required",
+            })}
+          />
+          {errors.adultCount?.message && (
+            <span className="text-red-500 text-sm fold-bold">
+              {errors.adultCount?.message}
+            </span>
+          )}
+        </label>
+        <label className="text-gray-700 text-sm font-semibold">
+          Children
+          <input
+            className="border rounded w-full py-2 px-3 font-normal"
+            type="number"
+            min={0}
+            {...register("childCount", {
+              required: "This field is required",
+            })}
+          />
+          {errors.childCount?.message && (
+            <span className="text-red-500 text-sm fold-bold">
+              {errors.childCount?.message}
+            </span>
+          )}
+        </label>
       </div>
-      {errors.facilities && (
-        <span className="text-red-500 text-sm font-bold">
-          {errors.facilities.message}
-        </span>
-      )}
     </div>
   );
 };
 
-export default FacilitiesSection;
+export default GuestsSection;
