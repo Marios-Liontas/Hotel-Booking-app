@@ -1,4 +1,3 @@
-
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
 import TypeSection from "./TypeSection";
@@ -34,7 +33,10 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
   const { handleSubmit, reset } = formMethods;
 
   useEffect(() => {
-    reset(hotel);
+    console.log("Hotel data:", hotel); // Add this line
+    if (hotel) {
+      reset(hotel);
+    }
   }, [hotel, reset]);
 
   const onSubmit = handleSubmit((formDataJson: HotelFormData) => {
