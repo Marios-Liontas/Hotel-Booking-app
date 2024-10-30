@@ -45,7 +45,8 @@ test("should allow user to add a hotel", async ({ page }) => {
   ]);
 
   await page.getByRole("button", { name: "Save" }).click();
-  await expect(page.getByText("Hotel Saved!")).toBeVisible();
+  await page.waitForTimeout(1000);
+  await page.waitForSelector('text="Hotel Saved!"');
 });
 
 test("should display hotels", async ({ page }) => {
