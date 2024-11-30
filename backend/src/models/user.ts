@@ -1,14 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
-
-// Creating a type that represents the user
-export type UserType = {
-    _id: string;
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-};
+import { UserType } from '../shared/types';
 
 // Creating the schema for the database
 const userSchema = new mongoose.Schema({
